@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>貝森こうた｜Webライター ポートフォリオ</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
+  color: #17324d;
+  background: #f7fbff;
+  line-height: 1.8;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+}
+
+/* ヘッダー */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  z-index: 100;
+  border-bottom: 1px solid #e5eef5;
+}
+
+.nav {
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 22px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  color: #2469a8;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+  font-size: 14px;
+}
+
+.nav-links a:hover {
+  color: #2775b7;
+}
+
+/* ヒーロー */
+.hero {
+  min-height: 680px;
+  display: flex;
+  align-items: center;
+  padding-top: 72px;
+  background:
+    linear-gradient(120deg, #edf8ff 0%, #ffffff 55%, #dceffc 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: rgba(91,170,221,0.12);
+  right: -180px;
+  top: 100px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+}
+
+.hero-label {
+  color: #2877b7;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.25;
+  font-family: Georgia, "Noto Serif JP", serif;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: #2877b7;
+}
+
+.hero p {
+  font-size: 17px;
+  color: #526b7f;
+  max-width: 650px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 13px 27px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: .3s;
+}
+
+.btn-primary {
+  background: #2775b7;
+  color: white;
+  box-shadow: 0 8px 20px rgba(39,117,183,.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+}
+
+.btn-secondary {
+  background: white;
+  color: #2775b7;
+  border: 1px solid #d4e5f2;
+}
+
+/* 共通 */
+section {
+  padding: 90px 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section-title small {
+  color: #4388ba;
+  letter-spacing: 3px;
+}
+
+.section-title h2 {
+  font-family: Georgia, "Noto Serif JP", serif;
+  font-size: 36px;
+  margin-top: 5px;
+}
+
+/* プロフィール */
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.profile-image {
+  min-height: 360px;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #d9effc, #ffffff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2775b7;
+  font-size: 70px;
+}
+
+.profile-text h3 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.profile-text p {
+  color: #5b7182;
+}
+
+/* サービス */
+.services {
+  background: white;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e3edf4;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 8px 30px rgba(30,80,110,.05);
+  transition: .3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(30,80,110,.1);
+}
+
+.icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: #667b8c;
+  font-size: 14px;
+}
+
+/* 実績 */
+.works {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.work {
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #e2edf5;
+  box-shadow: 0 8px 25px rgba(30,80,110,.06);
+}
+
+.work-image {
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  background: linear-gradient(135deg, #d8efff, #eef8ff);
+}
+
+.work-body {
+  padding: 25px;
+}
+
+.work-body h3 {
+  margin-bottom: 8px;
+}
+
+.work-body p {
+  color: #657989;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.work-link {
+  color: #2775b7;
+  font-weight: bold;
+}
+
+/* ジャンル */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.tag {
+  background: white;
+  border: 1px solid #d9e9f3;
+  border-radius: 30px;
+  padding: 10px 20px;
+  color: #2775b7;
+}
+
+/* スキル */
+.skills {
+  background: white;
+}
+
+.skill-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.skill {
+  padding: 20px;
+  border-radius: 15px;
+  background: #f3f9fd;
+  font-weight: bold;
+}
+
+/* 大切にしていること */
+.values {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.value {
+  background: white;
+  padding: 25px;
+  border-radius: 18px;
+  border: 1px solid #e2edf5;
+}
+
+.value h3 {
+  margin-bottom: 7px;
+}
+
+.value p {
+  color: #657989;
+  font-size: 14px;
+}
+
+/* お問い合わせ */
+.contact {
+  background: linear-gradient(135deg, #eaf7ff, #ffffff);
+  text-align: center;
+}
+
+.contact-box {
+  max-width: 750px;
+  margin: auto;
+}
+
+.contact-box p {
+  color: #5d7485;
+  margin: 15px 0 25px;
+}
+
+.email {
+  display: inline-block;
+  background: white;
+  padding: 15px 25px;
+  border-radius: 12px;
+  color: #2775b7;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* フッター */
+footer {
+  padding: 30px 0;
+  text-align: center;
+  background: #17324d;
+  color: white;
+  font-size: 13px;
+}
+
+/* スマホ */
+@media (max-width: 800px) {
+
+  .nav {
+    height: 62px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .hero {
+    min-height: 650px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 15px;
+  }
+
+  section {
+    padding: 65px 0;
+  }
+
+  .profile {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-image {
+    min-height: 250px;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .works {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .values {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title h2 {
+    font-size: 30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo">Kouta Kaibori</div>
+
+    <nav class="nav-links">
+      <a href="#profile">プロフィール</a>
+      <a href="#service">対応業務</a>
+      <a href="#works">執筆実績</a>
+      <a href="#skills">スキル</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="container hero-content">
+
+    <div class="hero-label">WEB WRITER / PORTFOLIO</div>
+
+    <h1>
+      読者に寄り添う文章で、<br>
+      <span>価値を届ける。</span>
+    </h1>
+
+    <p>
+      貝森こうた｜Webライター。<br>
+      丁寧なリサーチと、読者にとってわかりやすい文章を大切にしています。
+      SEO記事、ブログ記事、観光・スポーツ記事など幅広く対応します。
+    </p>
+
+    <div class="buttons">
+      <a href="#contact" class="btn btn-primary">お問い合わせ</a>
+      <a href="#works" class="btn btn-secondary">執筆実績を見る</a>
+    </div>
+
+  </div>
+</section>
+
+
+<section id="profile">
+  <div class="container">
+
+    <div class="section-title">
+      <small>PROFILE</small>
+      <h2>プロフィール</h2>
+    </div>
+
+    <div class="profile">
+
+      <div class="profile-image">
+        ✍️
+      </div>
+
+      <div class="profile-text">
+        <h3>貝森こうた</h3>
+
+        <p>
+          はじめまして、貝森こうたと申します。<br>
+          Webライターとして活動しています。
+        </p>
+
+        <br>
+
+        <p>
+          SEO記事やブログ記事を中心に、読者にとって
+          わかりやすく、役立つ情報を届けることを意識しています。
+        </p>
+
+        <br>
+
+        <p>
+          丁寧なリサーチと読みやすい文章を大切にし、
+          クライアント様の目的に沿った記事作成を心がけています。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="service" class="services">
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>SERVICE</small>
+      <h2>対応可能業務</h2>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📝</div>
+        <h3>SEO記事執筆</h3>
+        <p>
+          キーワードや検索意図を意識し、
+          読者にとってわかりやすい記事を執筆します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>ブログ記事執筆</h3>
+        <p>
+          読者目線を大切にし、読みやすく整理された
+          ブログ記事を作成します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏞️</div>
+        <h3>観光・お出かけ記事</h3>
+        <p>
+          観光地やお出かけ情報をリサーチし、
+          読者が行ってみたくなる記事を作成します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⚽</div>
+        <h3>スポーツ記事</h3>
+        <p>
+          スポーツに関する情報を整理し、
+          読みやすく伝わる記事を執筆します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎬</div>
+        <h3>YouTube台本・シナリオ</h3>
+        <p>
+          テーマや視聴者層に合わせてリサーチを行い、
+          最後まで読みやすい台本・シナリオを作成します。
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🔎</div>
+        <h3>リサーチ・構成作成</h3>
+        <p>
+          必要な情報を丁寧に調査し、
+          記事や台本の構成案として整理します。
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="works">
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>WORKS</small>
+      <h2>執筆実績</h2>
+    </div>
+
+    <div class="works">
+
+      <article class="work">
+
+        <div class="work-image">
+          🏯
+        </div>
+
+        <div class="work-body">
+
+          <h3>観光地紹介記事</h3>
+
+          <p>
+            観光地の魅力や見どころをリサーチし、
+            読者目線でわかりやすく紹介しています。
+          </p>
+
+          <a
+            class="work-link"
+            href="https://note.com/major_acacia8817/n/n1d6418bdeaeb"
+            target="_blank">
+            記事を読む →
+          </a>
+
+        </div>
+      </article>
+
+
+      <article class="work">
+
+        <div class="work-image">
+          ⚽
+        </div>
+
+        <div class="work-body">
+
+          <h3>スポーツ系記事</h3>
+
+          <p>
+            スポーツに関する情報を整理し、
+            読者にわかりやすく伝える記事を執筆しています。
+          </p>
+
+          <a
+            class="work-link"
+            href="https://note.com/major_acacia8817/n/n5cd6ef27e1ca"
+            target="_blank">
+            記事を読む →
+          </a>
+
+        </div>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>GENRE</small>
+      <h2>得意・対応ジャンル</h2>
+    </div>
+
+    <div class="tags">
+
+      <span class="tag">観光・旅行</span>
+      <span class="tag">スポーツ</span>
+      <span class="tag">グルメ</span>
+      <span class="tag">副業・Webライティング</span>
+      <span class="tag">ライフスタイル</span>
+      <span class="tag">IT・テクノロジー</span>
+      <span class="tag">YouTube台本</span>
+      <span class="tag">シナリオ作成</span>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="skills" class="skills">
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>SKILLS</small>
+      <h2>スキル・使用ツール</h2>
+    </div>
+
+    <div class="skill-list">
+
+      <div class="skill">💬 ChatGPT</div>
+      <div class="skill">📝 Google ドキュメント</div>
+      <div class="skill">📊 Google スプレッドシート</div>
+      <div class="skill">📄 Microsoft Word</div>
+      <div class="skill">📈 Microsoft Excel</div>
+      <div class="skill">🔎 Webリサーチ</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section>
+
+  <div class="container">
+
+    <div class="section-title">
+      <small>VALUES</small>
+      <h2>仕事で大切にしていること</h2>
+    </div>
+
+    <div class="values">
+
+      <div class="value">
+        <h3>👀 読者目線</h3>
+        <p>
+          読者が知りたい情報を意識し、
+          難しい内容でもできるだけわかりやすく伝えます。
+        </p>
+      </div>
+
+      <div class="value">
+        <h3>🔎 丁寧なリサーチ</h3>
+        <p>
+          複数の情報源を確認し、
+          情報の正確性を意識して執筆します。
+        </p>
+      </div>
+
+      <div class="value">
+        <h3>⏰ 納期厳守</h3>
+        <p>
+          決められた納期を守り、
+          責任を持って対応します。
+        </p>
+      </div>
+
+      <div class="value">
+        <h3>💬 丁寧なコミュニケーション</h3>
+        <p>
+          報告・連絡・相談を大切にし、
+          クライアント様と認識を合わせながら進めます。
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="contact" class="contact">
+
+  <div class="container contact-box">
+
+    <div class="section-title">
+      <small>CONTACT</small>
+      <h2>お問い合わせ</h2>
+    </div>
+
+    <p>
+      お仕事のご依頼・ご相談など、お気軽にお問い合わせください。<br>
+      SEO記事、ブログ記事、YouTube台本、シナリオ作成など、
+      内容に合わせて丁寧に対応いたします。
+    </p>
+
+    <a
+      class="email"
+      href="mailto:kaibori.kouta.writer@gmail.com">
+      📩 kaibori.kouta.writer@gmail.com
+    </a>
+
+    <br>
+
+    <a
+      href="https://note.com/major_acacia8817/"
+      target="_blank"
+      class="btn btn-primary">
+      noteを見る
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+  © 2026 Kouta Kaibori｜Web Writer
+</footer>
+
+</body>
+</html>
